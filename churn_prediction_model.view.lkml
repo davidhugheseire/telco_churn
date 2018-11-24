@@ -14,10 +14,6 @@
         column: monthly_charges {}
         column: tech_support {}
         column: churn{}
-        filters: {
-          field: customers.row_num
-          value: "<= 3000"
-        }
       }
     }
   }
@@ -38,10 +34,6 @@
         column: monthly_charges {}
         column: tech_support {}
         column: churn{}
-        filters: {
-          field: customers.row_num
-          value: ">= 3000"
-        }
       }
     }
   }
@@ -66,9 +58,10 @@
         , labels=['churn']
         , min_rel_progress = 0.005
         , max_iterations = 40
+        , data_split_method='auto_split'
         ) AS
       SELECT
-         * EXCEPT(id)
+         * EXCEPT(customer_id)
       FROM ${churn_training_input.SQL_TABLE_NAME};;
     }
   }
