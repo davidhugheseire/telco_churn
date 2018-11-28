@@ -7,6 +7,11 @@ view: customers {
     sql: ${TABLE}.customerID ;;
   }
 
+  dimension: row_num {
+    type: number
+    sql: ${TABLE}.Row_Num ;;
+  }
+
   dimension: churn {
     type: number
     sql: ${TABLE}.Churn ;;
@@ -77,11 +82,6 @@ view: customers {
     sql: ${TABLE}.PhoneService ;;
   }
 
-  dimension: row_num {
-    type: number
-    sql: ${TABLE}.Row_Num ;;
-  }
-
   dimension: senior_citizen {
     type: number
     sql: ${TABLE}.SeniorCitizen ;;
@@ -114,6 +114,5 @@ view: customers {
 
   measure: count {
     type: count
-    drill_fields: [customer_id]
   }
 }
