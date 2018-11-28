@@ -16,7 +16,7 @@ datagroup: bqml_datagroup {
 persist_with: dave_customer_churn_default_datagroup
 
 explore: customers {}
-explore: churn_model_training_info {}
-explore: churn_model_evaluation  {}
-explore: churn_roc_curve {}
+# explore: churn_model_training_info {}
+# explore: churn_model_evaluation  {}
+# explore: churn_roc_curve {}
 #explore: churn_prediction {}

@@ -14,9 +14,13 @@
         column: monthly_charges {}
         column: tech_support {}
         column: churn{}
-      }
+#       filters: {
+#         field: customers.row_num
+#         value: "<= 3000"
+#       }
     }
   }
+}
 
 # TESTING DATA SET
 # Training Data different partition range of data
@@ -34,10 +38,13 @@
         column: monthly_charges {}
         column: tech_support {}
         column: churn{}
-      }
+#         filters: {
+#           field: customers.row_num
+#           value: ">= 3000"
+#         }
     }
   }
-
+}
 
 ######################## MODEL #############################
 # Algorythm logistic regression, binary outcome, linear reg for range
@@ -248,10 +255,10 @@ view: churn_model_training_info {
         column: monthly_charges {}
         column: tech_support {}
         column: churn{}
-        filters: {
-          field: customers.row_num
-          value: "<= 3000"
-        }
+#         filters: {
+#           field: customers.row_num
+#           value: "<= 3000"
+#         }
       }
     }
   }
