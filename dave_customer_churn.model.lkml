@@ -15,7 +15,16 @@ datagroup: bqml_datagroup {
 
 persist_with: dave_customer_churn_default_datagroup
 
-explore: customers {}
+explore: customers {
+  always_filter: {
+    filters: {
+      field: customer_id
+      value: "-NULL"
+    }
+  }
+
+
+}
 explore: churn_model_training_info {}
 explore: churn_model_evaluation  {}
 explore: churn_roc_curve {}

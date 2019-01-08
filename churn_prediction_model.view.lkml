@@ -254,7 +254,6 @@ view: churn_model_training_info {
         column: tenure {}
         column: monthly_charges {}
         column: tech_support {}
-        column: churn{}
         filters: {
           field: customers.row_num
           value: "<= 3000"
