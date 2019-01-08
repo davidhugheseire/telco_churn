@@ -16,7 +16,7 @@
         column: churn{}
       filters: {
         field: customers.row_num
-        value: "<= 3000"
+        value: "<= 2500"
       }
     }
   }
@@ -40,7 +40,7 @@
         column: churn{}
         filters: {
           field: customers.row_num
-          value: ">= 3000"
+          value: ">= 2500"
         }
     }
   }
