@@ -8,11 +8,6 @@
     derived_table: {
       explore_source: customers {
         column: customer_id {}
-        column: contract {}
-        column: total_charges { }
-        column: tenure {}
-        column: monthly_charges {}
-        column: tech_support {}
         column: churn{}
       filters: {
         field: customers.row_num
@@ -32,11 +27,6 @@
     derived_table: {
       explore_source: customers {
         column: customer_id {}
-        column: contract {}
-        column: total_charges { }
-        column: tenure {}
-        column: monthly_charges {}
-        column: tech_support {}
         column: churn{}
         filters: {
           field: customers.row_num
@@ -249,10 +239,6 @@ view: churn_model_training_info {
     derived_table: {
       explore_source: customers {
         column: customer_id {}
-        column: contract {}
-        column: total_charges { }
-        column: tenure {}
-        column: monthly_charges {}
         column: tech_support {}
         filters: {
           field: customers.row_num
