@@ -1,13 +1,18 @@
-# TRAINING DATA SET
-# NDT
-# Model Features
+# Training data
+# Has the features to use in the model
 # Known Out Come - churn
-# Partitioned
+# Split testing - training
 #
+
+
   view: churn_training_input {
     derived_table: {
       explore_source: customers {
         column: customer_id {}
+        column: contract {}
+        column: total_charges { }
+        column: tenure {}
+        column: monthly_charges {}
         column: tech_support {}
         column: churn{}
       filters: {
@@ -18,16 +23,16 @@
   }
 }
 
-# TESTING DATA SET
-# Training Data different partition range of data
-# NDT
-# Known Out Come - churn
-# Partitioned
+# Testing data
 #
   view: churn_testing_input {
     derived_table: {
       explore_source: customers {
         column: customer_id {}
+        column: contract {}
+        column: total_charges { }
+        column: tenure {}
+        column: monthly_charges {}
         column: tech_support {}
         column: churn{}
         filters: {
@@ -241,6 +246,10 @@ view: churn_model_training_info {
     derived_table: {
       explore_source: customers {
         column: customer_id {}
+        column: contract {}
+        column: total_charges { }
+        column: tenure {}
+        column: monthly_charges {}
         column: tech_support {}
         filters: {
           field: customers.row_num
