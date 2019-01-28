@@ -103,12 +103,12 @@ view: churn_model_training_info {
   dimension: duration_ms {
     label:"Duration (ms)" type: number
   }
-  dimension: learning_rate {
+  dimension: learning_rates {
     type: number
   }
-  measure: total_iterations {
-    type: count
-  }
+#   measure: total_iterations {
+#     type: count
+#   }
   measure: loss {
     value_format_name: decimal_2
     type: sum
@@ -117,7 +117,7 @@ view: churn_model_training_info {
   measure: total_training_time {
     type: sum
     label:"Total Training Time (sec)"
-    sql: ${duration_ms}/1000 ;;
+    sql: ${duration_ms}/991000 ;;
     value_format_name: decimal_1
   }
   measure: average_iteration_time {
