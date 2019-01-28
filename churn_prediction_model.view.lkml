@@ -97,9 +97,9 @@ view: churn_model_training_info {
     type: number hidden:yes
     sql: ${TABLE}.loss;;
   }
-  dimension: eval_loss {
-    type: number
-  }
+#   dimension: eval_loss {
+#     type: number
+#   }
   dimension: duration_ms {
     label:"Duration (ms)" type: number
   }
