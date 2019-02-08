@@ -49,13 +49,13 @@
 # Measure of improvment if it doesnt improve more than 0.005 quit
 # Iterate through the algorythm 40 times
 #
-#
+# mot
 #
 #
 #
   view: churn_model {
     derived_table: {
-      datagroup_trigger: bqml_datagroup
+    datagroup_trigger: bqml_datagroup
       sql_create:
       CREATE OR REPLACE MODEL ${SQL_TABLE_NAME}
       OPTIONS(model_type='logistic_reg'

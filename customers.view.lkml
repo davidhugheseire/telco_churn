@@ -1,3 +1,5 @@
+explore: customers {}
+
 view: customers {
   sql_table_name: telco_churn.customers ;;
 
