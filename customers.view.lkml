@@ -1,4 +1,4 @@
-explore: customers {}
+
 
 view: customers {
   sql_table_name: telco_churn.customers ;;
@@ -9,15 +9,22 @@ view: customers {
     sql: ${TABLE}.customerID ;;
   }
 
+
+
+
   dimension: row_num {
-    type: number
-    sql: ${TABLE}.Row_Num ;;
+    type: string
+    sql: concat("12345678912345",cast(${TABLE}.Row_Num as string )) ;;
   }
 
   dimension: churn {
     type: number
     sql: ${TABLE}.Churn ;;
   }
+
+
+
+
 
   dimension: contract {
     type: string
@@ -28,6 +35,22 @@ view: customers {
     type: yesno
     sql: ${TABLE}.Dependents ;;
   }
+
+  dimension: dependents_formatted {
+    type: string
+    sql: ${TABLE}.Dependents ;;
+    html:
+    {% if value == true %}
+    <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ "Yes" }}</p>
+    {% elsif value == false %}
+    <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ "No" }}</p>
+    {% endif %}
+    ;;
+
+  }
+
+
+
 
   dimension: device_protection {
     type: string
@@ -114,7 +137,24 @@ view: customers {
     sql: ${TABLE}.TotalCharges ;;
   }
 
+  measure: ave_tc{
+    type: number
+    sql: cast(avg(total_charges) as number ;;
+  }
+
+
+
   measure: count {
     type: count
   }
+
+  measure: charge {
+    type: sum
+    sql:   ${monthly_charges} ;;
+  }
+
+
+
+
+
 }
