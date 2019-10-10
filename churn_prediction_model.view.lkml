@@ -9,16 +9,17 @@
     derived_table: {
       explore_source: customers {
         column: customer_id {}
+        column: is_even {}
         column: contract {}
         column: total_charges { }
         column: tenure {}
         column: monthly_charges {}
         column: tech_support {}
         column: churn{}
-      filters: {
-        field: customers.row_num
-        value: "<= 2500"
-      }
+        filters: {
+          field: customers.is_even
+          value: "Yes"
+        }
     }
   }
 }
@@ -29,6 +30,7 @@
     derived_table: {
       explore_source: customers {
         column: customer_id {}
+        column: is_even {}
         column: contract {}
         column: total_charges { }
         column: tenure {}
@@ -36,8 +38,8 @@
         column: tech_support {}
         column: churn{}
         filters: {
-          field: customers.row_num
-          value: ">= 2500"
+          field: customers.is_even
+          value: "No"
         }
     }
   }
@@ -58,14 +60,15 @@
     datagroup_trigger: bqml_datagroup
       sql_create:
       CREATE OR REPLACE MODEL ${SQL_TABLE_NAME}
-      OPTIONS(model_type='logistic_reg'
-        , labels=['churn']
+      OPTIONS(model_type = 'logistic_reg'
+        , labels = ['churn']
         , min_rel_progress = 0.005
         , max_iterations = 40
-        , data_split_method='auto_split'
+       -- , data_split_method = 'custom'
+      --  , data_split_col = 'is_even'
         ) AS
       SELECT
-         * EXCEPT(customer_id)
+         *
       FROM ${churn_training_input.SQL_TABLE_NAME};;
     }
   }
@@ -97,18 +100,18 @@ view: churn_model_training_info {
     type: number hidden:yes
     sql: ${TABLE}.loss;;
   }
-#   dimension: eval_loss {
-#     type: number
-#   }
+  dimension: eval_loss {
+    type: number
+  }
   dimension: duration_ms {
     label:"Duration (ms)" type: number
   }
   dimension: learning_rates {
     type: number
   }
-#   measure: total_iterations {
-#     type: count
-#   }
+  measure: total_iterations {
+    type: count
+  }
   measure: loss {
     value_format_name: decimal_2
     type: sum
@@ -251,10 +254,6 @@ view: churn_model_training_info {
         column: tenure {}
         column: monthly_charges {}
         column: tech_support {}
-        filters: {
-          field: customers.row_num
-          value: "<= 3000"
-        }
       }
     }
   }

@@ -2,7 +2,7 @@ connection: "lookerdata_publicdata_standard_sql"
 
 # include all the views
 include: "*.view"
-include: "*.dashboard"
+#include: "*.dashboard"
 
 datagroup: dave_customer_churn_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -31,9 +31,6 @@ explore: churn_model_evaluation  {}
 explore: churn_roc_curve {}
 explore: churn_prediction {}
 explore: daves_pdt {}
-
-
-
-explore: customers {
-
-}
+explore: customers {}
+explore: churn_training_input{}
+explore:churn_testing_input{}

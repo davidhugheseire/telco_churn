@@ -11,9 +11,14 @@
     filters:
       customers.gender: Male
     sorts: [customers.charge desc]
-    limit: 10
+    limit: 500
+    dynamic_fields: [{table_calculation: numbers, label: Numbers, expression: "if(\n\
+          \  (length(${customers.row_num}) > 10), concat(substring(${customers.row_num},\
+          \ 0, 10),\"....\"),\"no\")", value_format: !!null '', value_format_name: !!null '',
+        _kind_hint: dimension, _type_hint: string}]
     query_timezone: America/Los_Angeles
     series_types: {}
+    hidden_fields: [customers.row_num]
     listen: {}
     row: 0
     col: 0

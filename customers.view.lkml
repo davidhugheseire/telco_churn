@@ -9,22 +9,22 @@ view: customers {
     sql: ${TABLE}.customerID ;;
   }
 
-
-
-
-  dimension: row_num {
-    type: string
-    sql: concat("12345678912345",cast(${TABLE}.Row_Num as string )) ;;
+  dimension: cust_id {
+    type: number
+    sql: SUBSTR(${customer_id}, 0, 4) ;;
   }
+
+dimension: is_even {
+  type: string
+  sql:  case when mod(cast(${cust_id} as INT64), 2) <> 0 then "No" else "Yes" end;;
+
+}
+
 
   dimension: churn {
     type: number
     sql: ${TABLE}.Churn ;;
   }
-
-
-
-
 
   dimension: contract {
     type: string
@@ -36,125 +36,128 @@ view: customers {
     sql: ${TABLE}.Dependents ;;
   }
 
-  dimension: dependents_formatted {
-    type: string
-    sql: ${TABLE}.Dependents ;;
-    html:
-    {% if value == true %}
-    <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ "Yes" }}</p>
-    {% elsif value == false %}
-    <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ "No" }}</p>
-    {% endif %}
-    ;;
+#   dimension: dependents_formatted {
+#     type: string
+#     sql: ${TABLE}.Dependents ;;
+#     html:
+#     {% if value == true %}
+#     <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ "Yes" }}</p>
+#     {% elsif value == false %}
+#     <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ "No" }}</p>
+#     {% endif %}
+#     ;;
+#
+#     }
 
-  }
+    dimension: device_protection {
+      type: string
+      sql: ${TABLE}.DeviceProtection ;;
+    }
 
+    dimension: gender {
+      type: string
+      sql: ${TABLE}.gender ;;
+    }
 
+    dimension: internet_service {
+      type: string
+      sql: ${TABLE}.InternetService ;;
+    }
 
+    dimension: monthly_charges {
+      type: number
+      sql: ${TABLE}.MonthlyCharges ;;
+    }
 
-  dimension: device_protection {
-    type: string
-    sql: ${TABLE}.DeviceProtection ;;
-  }
+    dimension: multiple_lines {
+      type: string
+      sql: ${TABLE}.MultipleLines ;;
+    }
 
-  dimension: gender {
-    type: string
-    sql: ${TABLE}.gender ;;
-  }
+    dimension: online_backup {
+      type: string
+      sql: ${TABLE}.OnlineBackup ;;
+    }
 
-  dimension: internet_service {
-    type: string
-    sql: ${TABLE}.InternetService ;;
-  }
+    dimension: online_security {
+      type: string
+      sql: ${TABLE}.OnlineSecurity ;;
+    }
 
-  dimension: monthly_charges {
-    type: number
-    sql: ${TABLE}.MonthlyCharges ;;
-  }
+    dimension: paperless_billing {
+      type: yesno
+      sql: ${TABLE}.PaperlessBilling ;;
+    }
 
-  dimension: multiple_lines {
-    type: string
-    sql: ${TABLE}.MultipleLines ;;
-  }
+    dimension: partner {
+      type: yesno
+      sql: ${TABLE}.Partner ;;
+    }
 
-  dimension: online_backup {
-    type: string
-    sql: ${TABLE}.OnlineBackup ;;
-  }
+    dimension: payment_method {
+      type: string
+      sql: ${TABLE}.PaymentMethod ;;
+    }
 
-  dimension: online_security {
-    type: string
-    sql: ${TABLE}.OnlineSecurity ;;
-  }
+    dimension: phone_service {
+      type: yesno
+      sql: ${TABLE}.PhoneService ;;
+    }
 
-  dimension: paperless_billing {
-    type: yesno
-    sql: ${TABLE}.PaperlessBilling ;;
-  }
+    dimension: senior_citizen {
+      type: number
+      sql: ${TABLE}.SeniorCitizen ;;
+    }
 
-  dimension: partner {
-    type: yesno
-    sql: ${TABLE}.Partner ;;
-  }
+    dimension: streaming_movies {
+      type: string
+      sql: ${TABLE}.StreamingMovies ;;
+    }
 
-  dimension: payment_method {
-    type: string
-    sql: ${TABLE}.PaymentMethod ;;
-  }
+    dimension: streaming_tv {
+      type: string
+      sql: ${TABLE}.StreamingTV ;;
+    }
 
-  dimension: phone_service {
-    type: yesno
-    sql: ${TABLE}.PhoneService ;;
-  }
+    dimension: tech_support {
+      type: string
+      sql: ${TABLE}.TechSupport ;;
+    }
 
-  dimension: senior_citizen {
-    type: number
-    sql: ${TABLE}.SeniorCitizen ;;
-  }
+    dimension: tenure {
+      type: number
+      sql: ${TABLE}.tenure ;;
+    }
 
-  dimension: streaming_movies {
-    type: string
-    sql: ${TABLE}.StreamingMovies ;;
-  }
-
-  dimension: streaming_tv {
-    type: string
-    sql: ${TABLE}.StreamingTV ;;
-  }
-
-  dimension: tech_support {
-    type: string
-    sql: ${TABLE}.TechSupport ;;
-  }
-
-  dimension: tenure {
-    type: number
-    sql: ${TABLE}.tenure ;;
-  }
-
-  dimension: total_charges {
-    type: string
-    sql: ${TABLE}.TotalCharges ;;
-  }
-
-  measure: ave_tc{
-    type: number
-    sql: cast(avg(total_charges) as number ;;
-  }
+    dimension: total_charges {
+      type: string
+      sql: ${TABLE}.TotalCharges ;;
+    }
 
 
+    measure: count {
+      type: count
+    }
 
-  measure: count {
-    type: count
-  }
-
-  measure: charge {
-    type: sum
-    sql:   ${monthly_charges} ;;
-  }
-
+    measure: monthly_charge {
+      type: sum
+      sql:   ${monthly_charges} ;;
+    }
 
 
+      }
 
-
-}
+#   dimension: first_order_payment_methods{
+#     type: string
+#     sql: CASE WHEN ${monthly_charges} > 50 THEN ${total_charges}
+#       ELSE NULL END;;
+#   }
+#
+#   measure: first_order_payment_methods1{
+#     type: sum
+#     sql:  ${total_charges};;
+#   filters: {
+#     field: monthly_charges
+#     value: ">50"
+#   }
+#   }
